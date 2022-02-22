@@ -1,0 +1,20 @@
+.word {
+  width: 100px;
+  height: 100px;
+  border: solid 1px #000;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.word.correct {
+  background-color: #0c6;
+}
+
+.word.contain {
+  background-color: #fc0;
+}
+
+.word.incorrect {
+  background-color: #555;
+}

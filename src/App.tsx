@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useState } from "react";
+import "./App.css";
+
+import Words from "./components/Words";
 
 function App() {
+  const [input, setInput] = useState("");
+  const [answers, setAnswers] = useState<string[]>([]);
+  const ref = useRef<HTMLInputElement | null>(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {answers.map((answer, index) => (
+        <Words key={`${answer}-${index}`} answer={answer} question="thorn" />
+      ))}
+      <input
+        maxLength={5}
+        ref={ref}
+        onChange={(event) => {
+          setInput(event.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          if (ref.current) {
+            ref.current.value = "";
+          }
+          setInput("");
+          setAnswers([...answers, input]);
+        }}
+      >
+        ENTER
+      </button>
     </div>
   );
 }
